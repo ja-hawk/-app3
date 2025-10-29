@@ -1,0 +1,64 @@
+Tweet Persona
+AIがあなたのX人物像を診断
+https://tweet-persona.vercel.app
+
+概要
+X（旧Twitter）のユーザー名を入力すると、
+最新ツイートをAIが分析して、ユーモラスな人物像診断を返してくれます！
+
+例: @joshtriedcoding → 「ユーモラスな DevRel マエストロ」
+
+
+機能
+
+X API で ユーザー情報 + 最新20件のツイート を取得
+AI（OpenAI / Grok）で 自動診断生成
+ローディング中表示
+404 / エラー対応
+モバイル対応（Tailwind CSS）
+
+
+使い方
+
+ユーザー名を入力（@ あり/なし どちらでもOK）
+「診断」ボタンを押す
+結果がカードで表示！
+
+
+技術スタック
+
+項目技術フレームワークNext.js 14 (App Router)言語TypeScriptスタイルTailwind CSSX APItwitter-api-v2AIOpenAI (gpt-4o-mini) or Grok APIデプロイVercel
+
+環境変数（.env.local）
+envX_BEARER_TOKEN=your_x_bearer_token
+OPENAI_API_KEY=your_openai_key
+
+X Developer Portal で取得 → https://developer.x.com
+
+
+ローカル起動
+bashgit clone https://github.com/yourname/tweet-persona.git
+cd tweet-persona
+npm install
+cp .env.example .env.local
+# ← 環境変数を設定
+npm run dev
+→ http://localhost:3000
+
+デプロイ（Vercel）
+bashvercel
+Vercel ダッシュボードで環境変数を設定！
+
+ディレクトリ構造
+textapp/
+├── layout.tsx
+├── page.tsx              ← ホーム（入力フォーム）
+├── [username]/
+│   ├── page.tsx          ← 診断結果
+│   ├── loading.tsx       ← ローディング中
+│   └── error.tsx         ← エラー
+└── globals.css
+lib/
+├── data.ts               ← X API + AI ロジック
+components/
+└── PersonaCard.tsx       ← 診断カード
